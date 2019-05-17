@@ -4,6 +4,12 @@ const SUPPORT_EMAIL = 'support@email.com';
 const NOREPLY_EMAIL = 'no-reply@email.com';
 const DOMAIN = 'localhost';
 
+const MAILER_SMTP_HOST = 'smtp.zoho.com';
+const MAILER_SMTP_PORT = 465;
+const MAILER_SMTP_SECURE = true;
+const MAILER_SMTP_USER = 'yourzohoemail';
+const MAILER_SMTP_PASS = 'yourzohopassword';
+
 const MAILER_NAME = 'OpenTrade Mailer';
 const START_MESSAGE = 'OpenTrade started!';
 const OPENTRADE = "OpenTrade";
