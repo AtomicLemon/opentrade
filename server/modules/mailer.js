@@ -1,7 +1,19 @@
 'use strict';
 
 const g_constants = require("../constants.js");
-const sendmail = require('sendmail')();
+var nodemailer = require('nodemailer');
+
+// Create the transporter with the required configuration for Zoho
+// Change the user and password!
+var mailerTransport = nodemailer.createTransport({
+    host: 'smtp.zoho.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: 'no-reply@flame.exchange',
+        pass: 'GHVeh1wYoLo-xD'
+    }
+});
 
 exports.SendPIN = function(email, user, pin, callback)
 {
@@ -18,7 +30,7 @@ exports.SendPIN = function(email, user, pin, callback)
     try
     {
         let isSent = false;
-        sendmail({
+        mailertransport.sendMail({
             from: g_constants.OPENTRADE+' Mailer <'+g_constants.NOREPLY_EMAIL+'>',
             sender: g_constants.NOREPLY_EMAIL,
             to: unescape(email),
@@ -61,7 +73,7 @@ exports.SendSignupConfirmation = function(email, url, urlCheck, callback)
     try
     {
         let isSent = false;
-        sendmail({
+        mailertransport.sendMail({
             from: g_constants.OPENTRADE+' Mailer <'+g_constants.NOREPLY_EMAIL+'>',
             sender: g_constants.NOREPLY_EMAIL,
             to: unescape(email),
@@ -106,7 +118,7 @@ exports.SendPasswordResetConfirmation = function(email, user, url, urlCheck, cal
     try
     {
         let isSent = false;
-        sendmail({
+        mailertransport.sendMail({
             from: g_constants.OPENTRADE+' Mailer <'+g_constants.NOREPLY_EMAIL+'>',
             to: unescape(email),
             subject: subject,
@@ -137,7 +149,7 @@ exports.SendTicket = function(ticket, callback)
     try
     {
         let isSent = false;
-        sendmail({
+        mailertransport.sendMail({
             from: g_constants.OPENTRADE+' Mailer <'+g_constants.NOREPLY_EMAIL+'>',
             sender: g_constants.NOREPLY_EMAIL,
             to: g_constants.SUPPORT_EMAIL,
@@ -180,7 +192,7 @@ exports.SendWithdrawConfirmation = function(email, user, url, urlCheck, callback
     try
     {
         let isSent = false;
-        sendmail({
+        mailertransport.sendMail({
             from: g_constants.OPENTRADE+' Mailer <'+g_constants.NOREPLY_EMAIL+'>',
             sender: g_constants.NOREPLY_EMAIL,
             to: unescape(email),
@@ -210,7 +222,7 @@ exports.SendStartAppNotification = function(callback)
     try
     {
         let isSent = false;
-        sendmail({
+        mailertransport.sendMail({
             from: g_constants.OPENTRADE+' Mailer <'+g_constants.NOREPLY_EMAIL+'>',
             sender: g_constants.NOREPLY_EMAIL,
             to: g_constants.SUPPORT_EMAIL,
@@ -240,7 +252,7 @@ exports.SendAdminNotify = function(message, callback)
     try
     {
         let isSent = false;
-        sendmail({
+        mailertransport.sendMail({
             from: g_constants.OPENTRADE+' Mailer <'+g_constants.NOREPLY_EMAIL+'>',
             sender: g_constants.NOREPLY_EMAIL,
             to: g_constants.SUPPORT_EMAIL,
